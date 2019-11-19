@@ -8,9 +8,9 @@ num3 = int(input("и третье число: "))
 
 if num1 != num2 != num3 != num1:
     print("Все числа разные. Определим, какое из них является средним.")
-    if num1 < num2 < num3:
+    if num1 < num2 < num3 or num1 > num2 > num3:
         print(f"Среди введенных чисел ({num1},{num2},{num3}) число {num2} является средним.")
-    elif num2 < num1 < num3:
+    elif num2 < num1 < num3 or num2 > num1 > num3:
         print(f"Среди введенных чисел ({num1},{num2},{num3}) число {num1} является средним.")
     else:
         print(f"Среди введенных чисел ({num1},{num2},{num3}) число {num3} является средним.")
