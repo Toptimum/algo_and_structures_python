@@ -5,3 +5,22 @@
 число, чем то, что загадано. Если за 10 попыток число не отгадано,
 то вывести загаданное число.
 """
+import random
+
+random_number = random.randint(0, 100)
+user_number = None
+print("Программа сгенерировала случайное целое число от 0 до 100.\nУгадайте его за 10 попыток!")
+
+for i in range(10):
+    user_number = int(input(f"Попытка №{i + 1}, введите число: "))
+    if user_number == random_number:
+        print(f"\nПоздравляем! Вы угадали загаданное число '{random_number}' за {i + 1} попыток.")
+        break
+    else:
+        if user_number > random_number:
+            print("Не угадали. Попробуйте ввести число по-меньше.")
+        else:
+            print("Не угадали. Попробуйте ввести число по-больше.")
+
+if user_number != random_number:
+    print(f"\nК сожалению, вы исчерпали 10 попыток, но число не угадали.\nПрограмма загадала число '{random_number}'.")
