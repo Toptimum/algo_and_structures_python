@@ -5,3 +5,12 @@
 (или 0, 3, 4, 5 - если индексация начинается с нуля),
 т.к. именно в этих позициях первого массива стоят четные числа.
 """
+
+number_series = list(input("Введите список чисел через пробел( ): ").split())
+indexes = []
+
+for i in range(len(number_series)):
+    if int(number_series[i]) % 2 == 0:
+        indexes.append(i + 1)
+
+print(f"В списке чисел {number_series} четные элементы находятся на следующих позициях: {indexes}.")
