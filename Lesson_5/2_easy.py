@@ -1,4 +1,4 @@
-# ну очень простая версия программы
+# ну очень простая версия программы3
 
 def addition_numbers(num1, num2):
     sum_numbers = hex(num1 + num2)

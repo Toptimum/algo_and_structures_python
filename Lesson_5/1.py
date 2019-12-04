@@ -15,7 +15,7 @@ average_profit = 0
 for i in range(N_ENTERPRISES):
     name_enterprise = input(f"Введите название {i + 1}-го предприятия: ")
     quarter_profit = []
-    for j in range(4):  # всего 4 квартала в году
+    for j in range(4):  # всего 4 квартала в году1
         profit = int(input(f"Введите прибыль предприятия за {j + 1}-й квартал: "))
         quarter_profit.append(profit)
         average_profit += profit
