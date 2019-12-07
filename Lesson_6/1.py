@@ -7,3 +7,55 @@
 комментариев к коду. Также укажите в комментариях версию Python
 и разрядность вашей ОС.
 """
+
+import sys
+from memory_profiler import profile
+
+
+# алгоритм Решето Эратосфена для генерации списка простых чисел
+@profile
+def sieve_of_eratosthenes(n):
+    odds = range(3, n + 1, 2)
+    sieve = set(sum([list(range(q * q, n + 1, q + q)) for q in odds], []))
+    return [2] + [p for p in odds if p not in sieve]
+
+
+# алгоритм нашел в интернете
+@profile
+def prime_gen(n):
+    primes = [2]
+    a = 2
+    while a < n:
+        counter = 0
+        for i in primes:
+            if a % i == 0:
+                counter += 1
+        if counter == 0:
+            primes.append(a)
+        else:
+            counter = 0
+        a = a + 1
+    return primes
+
+
+QUANTITY = int(input("Введите, до какого числа нужно сгенерировать список простых чисел: "))
+
+# Без использования «Решета Эратосфена»
+number_series1 = prime_gen(QUANTITY)
+print(f"\n1. Список простых чисел, сгенерированный простым алгоритмом: {number_series1}.")
+print(f"На список ведет {sys.getrefcount(number_series1)} ссылок в памяти.\n")  # 2
+print(f"Список занимает {sys.getsizeof(number_series1)} памяти.\n")  # 224
+
+print("\n=======================================================================================\n")
+# Используя алгоритм «Решето Эратосфена»
+number_series2 = sieve_of_eratosthenes(QUANTITY)
+print(f"\n2. Список простых чисел, сгенерированный алгоритмом 'Решето Эратосфена': {number_series2}.")
+print(f"На список ведет {sys.getrefcount(number_series2)} ссылок в памяти.")  # 2
+print(f"Список занимает {sys.getsizeof(number_series2)} памяти.\n")  # 220
+
+# Характеристики: Windows 10 64-битная, Python 3.7.4
+# При генерации списка простых чисел до 5000 алгоритмы по-разному использовали память:
+# 1. простой алгоритм (найденный в интернете) использовал максимум 13.5 MiB, скриншот https://yadi.sk/d/LkbfuG4WeCdl5w
+# 2. а алгоритм Решето Эратосфена использовал 13.7 MiB https://yadi.sk/d/Dr6I0dlXz9e4kQ
+# Вывод: алгоритм Решето Эратосфена немного затратнее использует память, но по timeit этот алгоритм
+# работает в 7 раз быстрее (0.432 против 3.411 секунд).
